@@ -11,7 +11,6 @@ import java.time.Duration;
 public class BaseTest {
 
     protected WebDriver driver;
-
     @BeforeMethod
     public void setUp() {
 
