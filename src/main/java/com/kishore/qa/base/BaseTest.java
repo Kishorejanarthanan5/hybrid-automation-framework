@@ -1,5 +1,6 @@
 package com.kishore.qa.base;
 
+import com.kishore.qa.constants.FrameworkConstants;
 import com.kishore.qa.driver.DriverFactory;
 import com.kishore.qa.utils.ConfigReader;
 import org.openqa.selenium.WebDriver;
@@ -14,19 +15,22 @@ public class BaseTest {
     @BeforeMethod
     public void setUp() {
 
-        String browser = ConfigReader.getProperty("browser");
-        String url = ConfigReader.getProperty("url");
-        String implicitWait = ConfigReader.getProperty("implicit.wait");
-        int waitTime = Integer.parseInt(implicitWait);
+        String browser = ConfigReader.getProperty(FrameworkConstants.BROWSER_KEY);
+        String url = ConfigReader.getProperty(FrameworkConstants.URL_KEY);
+
+        int waitTime = Integer.parseInt(
+                ConfigReader.getProperty(FrameworkConstants.IMPLICIT_WAIT_KEY)
+        );
 
         DriverFactory.initDriver(browser);
         driver = DriverFactory.getDriver();
+
         driver.get(url);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(waitTime));
     }
 
     @AfterMethod
     public void tearDown(){
-        DriverFactory.quitDriver();
+                DriverFactory.quitDriver();
     }
 }

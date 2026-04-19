@@ -1,5 +1,6 @@
 package com.kishore.qa.utils;
 
+import com.kishore.qa.constants.FrameworkConstants;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -16,7 +17,10 @@ public class WaitUtils {
     public WaitUtils(WebDriver driver) {
         this.driver = driver;
 
-        int timeout = Integer.parseInt(ConfigReader.getProperty("explicit.wait"));
+        int timeout = Integer.parseInt(
+                ConfigReader.getProperty(FrameworkConstants.EXPLICIT_WAIT_KEY)
+        );
+
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
     }
 
