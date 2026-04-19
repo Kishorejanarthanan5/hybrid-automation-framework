@@ -9,9 +9,8 @@ public class HomePage {
     private final WebDriver driver;
     private final WaitUtils wait;
     private final By signupLoginLink = By.cssSelector("a[href='/login']");
-    private final By logoutLink = By.cssSelector("a[href='/logout']");
     private final By productsLink = By.cssSelector("a[href='/products']");
-
+    private final By loggedInUser = By.xpath("//a[.//b]");
     public HomePage(WebDriver driver){
         this.driver = driver;
         this.wait = new WaitUtils(driver);
@@ -21,11 +20,19 @@ public class HomePage {
         wait.waitForElementClickable(signupLoginLink).click();
     }
 
-    public boolean isLogoutLinkDisplayed() {
-        return wait.waitForElementVisible(logoutLink).isDisplayed();
-    }
 
     public void clickProducts(){
         wait.waitForElementClickable(productsLink).click();
+    }
+    // ===== Validations =====
+    // Basic check (any user logged in)
+    public boolean isUserLoggedIn() {
+        return wait.waitForElementVisible(loggedInUser).isDisplayed();
+    }
+
+    // Strong check (specific user)
+    public boolean isUserLoggedIn(String username) {
+        By dynamicUser = By.xpath("//a[.//b[text()='" + username + "']]");
+        return wait.waitForElementVisible(dynamicUser).isDisplayed();
     }
 }
