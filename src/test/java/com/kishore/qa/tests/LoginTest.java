@@ -16,7 +16,7 @@ public class LoginTest extends BaseTest {
         homePage.clickSignupLogin();
         loginPage.loginAs(ConfigReader.getProperty("valid.email"), ConfigReader.getProperty("valid.password"));
         // Strong assertion (correct page + correct validation)
-        Assert.assertTrue(homePage.isUserLoggedIn("kishore"),
+        Assert.assertTrue(homePage.isUserLoggedIn(ConfigReader.getProperty("valid.username")),
                 "Login failed: Expected username not displayed after login");
     }
     @Test
