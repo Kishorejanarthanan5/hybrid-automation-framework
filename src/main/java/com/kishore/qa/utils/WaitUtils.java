@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
+import org.openqa.selenium.interactions.Actions;
 import java.time.Duration;
 
 public class WaitUtils {
@@ -37,5 +37,12 @@ public class WaitUtils {
     // Wait until URL contains a specific fragment
     public boolean waitForUrlContains(String urlFragment) {
         return wait.until(ExpectedConditions.urlContains(urlFragment));
+    }
+
+    // Wait until hover method
+    public void hoverOverElement(By locator) {
+        WebElement element = waitForElementVisible(locator);
+        Actions actions = new Actions(driver);
+        actions.moveToElement(element).perform();
     }
 }
