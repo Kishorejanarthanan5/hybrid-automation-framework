@@ -21,6 +21,7 @@ public class DriverFactory {
                 options.addArguments("--start-maximized"); // Launch browser in maximized mode
                 options.addArguments("--remote-allow-origins=*"); // Handle cross-origin issues in newer Chrome versions
                 options.addArguments("--disable-notifications"); // Disable browser notifications
+                options.addArguments("--disable-popup-blocking");// Disable popup blocking (prevents unexpected modal behavior issues)
                 driver.set(new ChromeDriver(options)); // Create and store ChromeDriver for current thread
                 break;
 
