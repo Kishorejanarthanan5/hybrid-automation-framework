@@ -14,6 +14,7 @@ public final class FrameworkConstants {
     public static final String URL_KEY = "url";
     public static final String IMPLICIT_WAIT_KEY = "implicit.wait";
     public static final String EXPLICIT_WAIT_KEY = "explicit.wait";
+    public static final String API_BASE_URL_KEY = "api.baseUrl";
 
     // ===== Default Values =====
     public static final int DEFAULT_EXPLICIT_WAIT = 10;
