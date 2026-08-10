@@ -5,7 +5,6 @@ import com.kishore.qa.driver.DriverFactory;
 import com.kishore.qa.pages.CartPage;
 import com.kishore.qa.pages.HomePage;
 import com.kishore.qa.pages.ProductsPage;
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
