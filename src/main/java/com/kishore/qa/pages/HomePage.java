@@ -2,7 +2,9 @@ package com.kishore.qa.pages;
 
 import com.kishore.qa.utils.WaitUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 public class HomePage {
 
@@ -21,8 +23,9 @@ public class HomePage {
     }
 
 
-    public void clickProducts(){
-        wait.waitForElementClickable(productsLink).click();
+    public void clickProducts() {
+        WebElement products = wait.waitForElementClickable(productsLink);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", products);
     }
     // ===== Validations =====
     // Basic check (any user logged in)

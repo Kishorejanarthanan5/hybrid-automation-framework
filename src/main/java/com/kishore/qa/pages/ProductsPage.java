@@ -2,6 +2,7 @@ package com.kishore.qa.pages;
 
 import com.kishore.qa.utils.WaitUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -35,7 +36,8 @@ public class ProductsPage {
         wait.waitForElementClickable(searchBtn).click();
     }
     public void clickViewCartOnModal() {
-        wait.waitForElementClickable(viewCartBtn).click();
+        WebElement viewCart = wait.waitForElementVisible(viewCartBtn);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", viewCart);
     }
 
     public void addFirstProductToCart() {
