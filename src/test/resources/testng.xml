@@ -6,6 +6,8 @@
             <class name="com.kishore.qa.tests.LoginTest"/>
             <class name="com.kishore.qa.tests.ProductTest"/>
             <class name="com.kishore.qa.tests.ProductAPITest"/>
+            <class name="com.kishore.qa.tests.UserAPITest"/>
+            <class name="com.kishore.qa.tests.UserCrudTest"/>
         </classes>
     </test>
 </suite>
