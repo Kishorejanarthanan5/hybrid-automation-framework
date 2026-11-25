@@ -8,6 +8,23 @@ import static io.restassured.RestAssured.given;
 
 public class UserAPI {
 
+    // Shared defaults — createAccount and updateAccount require the full
+    // param set, so both must agree or an update silently mutates fields
+    // the test never intended to change.
+    private static final String TITLE          = "Mr";
+    private static final String BIRTH_DATE     = "1";
+    private static final String BIRTH_MONTH    = "January";
+    private static final String BIRTH_YEAR     = "1990";
+    private static final String LASTNAME       = "Automation";
+    private static final String COMPANY        = "Test Co";
+    private static final String ADDRESS1       = "1 Test Street";
+    private static final String ADDRESS2       = "Block B";
+    private static final String COUNTRY        = "India";
+    private static final String STATE          = "Tamil Nadu";
+    private static final String ZIPCODE        = "641001";
+    private static final String MOBILE_NUMBER  = "9999999999";
+    private static final String DEFAULT_CITY   = "Coimbatore";
+
     public UserAPI() {
         APIConfig.setup();
     }
@@ -21,22 +38,52 @@ public class UserAPI {
                 .formParam("name", name)
                 .formParam("email", email)
                 .formParam("password", password)
-                .formParam("title", "Mr")
-                .formParam("birth_date", "1")
-                .formParam("birth_month", "January")
-                .formParam("birth_year", "1990")
+                .formParam("title", TITLE)
+                .formParam("birth_date", BIRTH_DATE)
+                .formParam("birth_month", BIRTH_MONTH)
+                .formParam("birth_year", BIRTH_YEAR)
                 .formParam("firstname", name)
-                .formParam("lastname", "Automation")
-                .formParam("company", "Test Co")
-                .formParam("address1", "1 Test Street")
-                .formParam("address2", "Block B")
-                .formParam("country", "India")
-                .formParam("state", "Tamil Nadu")
-                .formParam("city", "Coimbatore")
-                .formParam("zipcode", "641001")
-                .formParam("mobile_number", "9999999999")
+                .formParam("lastname", LASTNAME)
+                .formParam("company", COMPANY)
+                .formParam("address1", ADDRESS1)
+                .formParam("address2", ADDRESS2)
+                .formParam("country", COUNTRY)
+                .formParam("state", STATE)
+                .formParam("city", DEFAULT_CITY)
+                .formParam("zipcode", ZIPCODE)
+                .formParam("mobile_number", MOBILE_NUMBER)
                 .when()
                 .post(APIEndpoints.CREATE_ACCOUNT)
+                .then()
+                .extract().response();
+    }
+
+    /**
+     * Updates a user. API 13 is a full-record PUT, not a PATCH — every field
+     * is overwritten, so defaults here mirror createUser() exactly. Only the
+     * caller-supplied name and city differ from the created state.
+     */
+    public Response updateUser(String email, String password, String name, String city) {
+        return given()
+                .formParam("name", name)
+                .formParam("email", email)
+                .formParam("password", password)
+                .formParam("title", TITLE)
+                .formParam("birth_date", BIRTH_DATE)
+                .formParam("birth_month", BIRTH_MONTH)
+                .formParam("birth_year", BIRTH_YEAR)
+                .formParam("firstname", name)
+                .formParam("lastname", LASTNAME)
+                .formParam("company", COMPANY)
+                .formParam("address1", ADDRESS1)
+                .formParam("address2", ADDRESS2)
+                .formParam("country", COUNTRY)
+                .formParam("state", STATE)
+                .formParam("city", city)
+                .formParam("zipcode", ZIPCODE)
+                .formParam("mobile_number", MOBILE_NUMBER)
+                .when()
+                .put(APIEndpoints.UPDATE_ACCOUNT)
                 .then()
                 .extract().response();
     }
